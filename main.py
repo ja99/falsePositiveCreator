@@ -1,20 +1,20 @@
 import glob
 import json
 import random
-
+from tqdm import tqdm
 from PIL import Image, ImageDraw, ImageFilter
 
-N_IMAGES = 10
+N_IMAGES = 20
 
 false_positive_imgs = []
-for path in glob.iglob(f'false_positive_imgs/**/*.png', recursive=True):
+for path in glob.iglob(f'false_positive_imgs/**/*', recursive=True):
     false_positive_imgs.append(path)
 
 positive_imgs = []
 for path in glob.iglob(f'positive_imgs/**/*.png', recursive=True):
     positive_imgs.append(path)
 
-for i in range(N_IMAGES):
+for i in tqdm(range(N_IMAGES)):
     p_i = random.randint(0, len(positive_imgs) - 1)
     positive = Image.open(positive_imgs[p_i])
     positive_meta: dict
